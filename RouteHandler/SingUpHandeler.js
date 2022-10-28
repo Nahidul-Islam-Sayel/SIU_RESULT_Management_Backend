@@ -65,7 +65,6 @@ router.post("/doctor",async(req,res)=>{
     }
 })
 router.post("/login",async(req,res)=>{
- 
    try {
       const user = await User.find({ username: req.body.username });
       if (user&&user.length>0) {

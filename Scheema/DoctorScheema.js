@@ -19,22 +19,15 @@ const DoctorSchema= mongoose.Schema({
         type: "number",
         require: "true"
     },
-    Registation:{
-        type: "number",
-        require: "true"
-    },
-    address:{
+   
+    chamber:{
         type: "string",
         require: "true"
     },
     password:{
         type:"string",
         require: "true"
-    },
-    confirmpassword:{
-        type:"string",
-        require: "true"
-    },
+    }
 });
 DoctorSchema.plugin(uniqueValidator);
 module.exports=DoctorSchema;

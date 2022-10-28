@@ -4,7 +4,10 @@ const fileUpload = require('express-fileupload')
 const dotenv = require("dotenv");
 const SingUpHanderler= require('./RouteHandler/SingUpHandeler')
 const DoctorLoginHandler= require('./RouteHandler/DoctorLoginHandler')
+const AdminLoginHandeler= require('./RouteHandler/AdminLoginHandeler')
+const BllodDonner= require('./RouteHandler/BloodSection')
 const UploadFileUser= require('./RouteHandler/UploadFileUser')
+const PaymentHandeler= require('./RouteHandler/PaymentHandeler')
 var cors = require('cors')
 const app = express()
 dotenv.config()
@@ -19,8 +22,10 @@ app.use(express.json());
 app.use(cors()) 
 app.use('/Singup',SingUpHanderler)
 app.use('/Singupdoc',DoctorLoginHandler);
+app.use('/BloodDonner',BllodDonner);
+app.use('/SingUpAdmin',AdminLoginHandeler);
 app.use('/Upload',UploadFileUser)
-
+app.use('/VisitDoctor',PaymentHandeler)
 app.use(express.static('Uploads'))
 app.use(fileUpload);
 // default error handler
