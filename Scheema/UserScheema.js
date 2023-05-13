@@ -10,30 +10,23 @@ const userSchema= mongoose.Schema({
         require: "true",
         unique: "true",
     },
-    email:{
-        type: "string",
-        require: "true",
-        unique: "true"
-    },
+    
     phone:{
         type: "number",
-        require: "true"
+        // require: "true"
     },
   
-    address:{
-        type: "string",
-        require: "true"
-    },
+  
     password:{
         type:"string",
-        require: "true"
+        // require: "true"
+    }
+    ,
+    batch:{
+        type:"number",
     },
-    confirmpassword:{
-        type:"string",
-        require: "true"
-    },
-    image:{
-        type: 'Buffer'
+    roll:{
+        type: 'string'
     }
 });
 userSchema.plugin(uniqueValidator);
