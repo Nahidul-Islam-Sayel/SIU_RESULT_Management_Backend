@@ -3,7 +3,8 @@ const mongoose= require('mongoose');
 const fileUpload = require('express-fileupload')
 const dotenv = require("dotenv");
 const SingUpHanderler= require('./RouteHandler/SingUpHandeler')
-const DepartmentHandler= require('./RouteHandler/DepartmentHandler')
+const CseDepartmentHandler= require('./RouteHandler/CseDepartmentHandler')
+const TeachersHandler = require('./RouteHandler/TeachersHandler')
 // const AdminLoginHandeler= require('./RouteHandler/AdminLoginHandeler')
 // const BllodDonner= require('./RouteHandler/BloodSection')
 // const UploadFileUser= require('./RouteHandler/UploadFileUser')
@@ -21,7 +22,8 @@ mongoose.connect(`mongodb+srv://sametakbo:sametakbo@cluster0.d8lte.mongodb.net/R
 app.use(express.json());
 app.use(cors()) 
 app.use('/Singup',SingUpHanderler)
-app.use('/LoginDepartment',DepartmentHandler);
+app.use('/LoginDepartmentCSE', CseDepartmentHandler );
+app.use('/Teachers', TeachersHandler );
 // app.use('/BloodDonner',BllodDonner);
 // app.use('/SingUpAdmin',AdminLoginHandeler);
 // app.use('/Upload',UploadFileUser)
