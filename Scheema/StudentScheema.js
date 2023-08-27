@@ -29,7 +29,7 @@ const StudentSchema= mongoose.Schema({
         type:"string",
         require: "true",
     },
-    Roll_NUmber:{
+    roll:{
         type: 'string',
         require: "true",
         unique: "true",

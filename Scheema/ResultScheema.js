@@ -7,8 +7,7 @@ const ResultSchema= mongoose.Schema({
     },
     Roll:{
         type: "string",
-        require: "true",
-        unique: "true"
+        require: "true"
     },
     Credit:{
         type:"string",

@@ -21,7 +21,7 @@ const Department = new mongoose.model("CSE",DepartmentSchema);
 const CheakLoginControler = require('../MiddleWears/CheakLoginControler')
 const saltRounds = 10;
 router.post("/StudentsRegistration",async(req,res)=>{
-    // console.log(req.body)
+    console.log(req.body)
     const hashpassword =  await bcrypt.hash(req.body.password_1, saltRounds);
     // console.log(hashpassword);
     try {
