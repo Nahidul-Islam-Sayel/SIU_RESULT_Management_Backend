@@ -36,7 +36,11 @@ const AddNumberSchema = mongoose.Schema({
     Reg:{
         type: Number,
         required: true,
-    }
+    },
+    CourseHoure:{
+        type: String,
+        required: true,
+    }    
 });
 
 

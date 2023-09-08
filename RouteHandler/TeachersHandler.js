@@ -75,7 +75,7 @@ router.post("/login", async(req,res)=>{
        
    })
    
-   router.get('/AssignCourse', CheakLoginControler, async (req, res) => {
+router.get('/AssignCourse', CheakLoginControler, async (req, res) => {
     try {
       const teacherNameToSearch = req.query.teachername; // The search query parameter
   console.log(teacherNameToSearch)
@@ -96,7 +96,7 @@ router.post("/login", async(req,res)=>{
       });
     }
   });
-  router.get("/Students",CheakLoginControler,async(req,res)=>{
+router.get("/Students",CheakLoginControler,async(req,res)=>{
       try {  
           const user = await Students.find({ current_semister: req.query.semester  });
         
@@ -111,7 +111,7 @@ router.post("/login", async(req,res)=>{
           }); 
       }       
    })
-   router.post("/Marks", async (req, res) => {
+router.post("/Marks", async (req, res) => {
     try {
         console.log(req.body);
         const Sessional = parseInt(req.body.Sessional);
@@ -123,6 +123,7 @@ router.post("/login", async(req,res)=>{
             Midterm: Midterm,
             Final: Final,
             Total: Sessional + Midterm + Final,
+            CourseHoure: req.body.CourseHoure,
             Roll: req.body.Roll,
             CourseCode: req.body.CourseCode,
             Semester: req.body.semester,
@@ -142,7 +143,7 @@ router.post("/login", async(req,res)=>{
         });
     }
 });
-    router.get("/ResultList",CheakLoginControler,async(req,res)=>{
+router.get("/ResultList",CheakLoginControler,async(req,res)=>{
   
          try {  
            console.log(req.query.course )
@@ -161,7 +162,7 @@ router.post("/login", async(req,res)=>{
        
           
       })
-      router.put('/EditNumber/:id', async (req, res) => {
+router.put('/EditNumber/:id', async (req, res) => {
         try {
           const user = await Marks.find({ _id: req.params.id });
           console.log(user)

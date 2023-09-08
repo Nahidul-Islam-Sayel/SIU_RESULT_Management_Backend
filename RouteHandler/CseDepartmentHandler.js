@@ -286,6 +286,7 @@ router.post("/login", async(req,res)=>{
       const assignCourse = new AssignCourseModel({
         courseName: req.body.CourseName,
         teachersName: req.body.TeachersName,
+        CourseHoure: req.body.courseHoure,
         semester: req.body.semesters.map((semester) => ({
           batch: semester.batch,
           semester: semester.semester,

@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const SingUpHanderler= require('./RouteHandler/SingUpHandeler')
 const CseDepartmentHandler= require('./RouteHandler/CseDepartmentHandler')
 const TeachersHandler = require('./RouteHandler/TeachersHandler')
+const ControlerHandler = require('./RouteHandler/ControlerHandler')
 // const AdminLoginHandeler= require('./RouteHandler/AdminLoginHandeler')
 // const BllodDonner= require('./RouteHandler/BloodSection')
 // const UploadFileUser= require('./RouteHandler/UploadFileUser')
@@ -24,6 +25,7 @@ app.use(cors())
 app.use('/Singup',SingUpHanderler)
 app.use('/LoginDepartmentCSE', CseDepartmentHandler );
 app.use('/Teachers', TeachersHandler );
+app.use('/Controler', ControlerHandler );
 // app.use('/BloodDonner',BllodDonner);
 // app.use('/SingUpAdmin',AdminLoginHandeler);
 // app.use('/Upload',UploadFileUser)

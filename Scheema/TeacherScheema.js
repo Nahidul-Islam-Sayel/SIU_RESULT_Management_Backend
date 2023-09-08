@@ -27,7 +27,7 @@ const TeacherScheema= mongoose.Schema({
     department:{
         type:"string",
         require: "true",
-    },
+    }
 });
 TeacherScheema.plugin(uniqueValidator);
 module.exports=TeacherScheema;

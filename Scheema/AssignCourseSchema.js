@@ -26,6 +26,10 @@ const AssignCourse= mongoose.Schema({
       department:{
         type: "string",
         require: "true"  
+    },
+    CourseHoure:{
+      type: "string",
+        require: "true",
     }
 });
 AssignCourse.plugin(uniqueValidator);
