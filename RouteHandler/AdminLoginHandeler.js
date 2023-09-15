@@ -11,7 +11,7 @@ const saltRounds = 10;
 router.post("/login",async(req,res)=>{
     try {
        const user = await Admin.find({ username: req.body.username });
-       console.log(user)
+     
        if (user&&user.length>0) {
              const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
              if(isvalidPassword) {

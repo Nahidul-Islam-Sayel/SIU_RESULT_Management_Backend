@@ -18,9 +18,7 @@ const CheakLoginControler = require('../MiddleWears/CheakLoginControler')
 const saltRounds = 10;
 router.post("/login", async(req,res)=>{
     try {
-
        const user = await Teachers.find({ username: req.body.name });
- 
        if (user&&user.length>0) {
             //  const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
             const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
@@ -56,33 +54,24 @@ router.post("/login", async(req,res)=>{
     }  
  })
  router.get("/Profile",CheakLoginControler,async(req,res)=>{
-    //  console.log( req.query.Department);
       try {  
-        
           const user = await Teachers.find({username: req.query.username  });
-        
           if(user&&user.length>0){
               res.send(user)
-             console.log(user)
-          }
-          
+          }   
       } catch (error) {
           res.status(200).json({
               "error": "Wrong Username and password"
           }); 
       }
-    
-       
    })
    
 router.get('/AssignCourse', CheakLoginControler, async (req, res) => {
     try {
-      const teacherNameToSearch = req.query.teachername; // The search query parameter
-  console.log(teacherNameToSearch)
+      const teacherNameToSearch = req.query.teachername; 
       const courses = await AssignCourseModel.find({
         teachersName: { $regex: new RegExp(teacherNameToSearch, 'i') }
       });
-  console.log(courses)
       if (courses && courses.length > 0) {
         res.send(courses);
       } else {
@@ -102,7 +91,6 @@ router.get("/Students",CheakLoginControler,async(req,res)=>{
         
           if(user&&user.length>0){
               res.send(user)
-             // console.log(user)
           }
           
       } catch (error) {
@@ -113,11 +101,9 @@ router.get("/Students",CheakLoginControler,async(req,res)=>{
    })
 router.post("/Marks", async (req, res) => {
     try {
-        console.log(req.body);
         const Sessional = parseInt(req.body.Sessional);
         const Midterm = parseInt(req.body.Midterm);
         const Final = parseInt(req.body.Final);
-        
         const MarksAdd = new Marks({
             Sessional: Sessional,
             Midterm: Midterm,
@@ -132,7 +118,6 @@ router.post("/Marks", async (req, res) => {
         });
         
         await MarksAdd.save();
-        
         res.status(200).json({
             message: "Marks Added Successfully",
         });
@@ -144,9 +129,7 @@ router.post("/Marks", async (req, res) => {
     }
 });
 router.get("/ResultList",CheakLoginControler,async(req,res)=>{
-  
          try {  
-           console.log(req.query.course )
              const user = await Marks.find({ CourseCode: req.query.course });
            
              if(user&&user.length>0){
@@ -165,7 +148,6 @@ router.get("/ResultList",CheakLoginControler,async(req,res)=>{
 router.put('/EditNumber/:id', async (req, res) => {
         try {
           const user = await Marks.find({ _id: req.params.id });
-          console.log(user)
             let Total =0;
             if(req.body.Sessional)
                Total+=parseInt(req.body.Sessional);
@@ -205,7 +187,7 @@ router.put('/EditNumber/:id', async (req, res) => {
                 updatedData: result
             });
         } catch (error) {
-            console.error(error);
+         
             res.status(500).json({
                 error: 'There was an error'
             });

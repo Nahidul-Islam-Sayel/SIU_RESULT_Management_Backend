@@ -21,7 +21,7 @@ const Department = new mongoose.model("CSE",DepartmentSchema);
 const CheakLoginControler = require('../MiddleWears/CheakLoginControler')
 const saltRounds = 10;
 router.post("/StudentsRegistration",async(req,res)=>{
-    console.log(req.body)
+ 
     const hashpassword =  await bcrypt.hash(req.body.password_1, saltRounds);
     // console.log(hashpassword);
     try {
@@ -50,7 +50,7 @@ router.post("/StudentsRegistration",async(req,res)=>{
 })
 router.post("/TeachersRegistration",CheakLoginControler, async(req,res)=>{
     const hashpassword =  await bcrypt.hash(req.body.password_1, saltRounds);
-    console.log(req.body.position);
+
     try {
         const newTeachers = new Teachers({
             name: req.body.name,
@@ -72,7 +72,6 @@ router.post("/TeachersRegistration",CheakLoginControler, async(req,res)=>{
     }
 })
 router.put("/EditTeachers/:id", CheakLoginControler, async (req, res) => {
-  console.log(req.body);
   try {
     const result =  Teachers.findByIdAndUpdate(
       { _id: req.params.id },
@@ -108,7 +107,6 @@ router.put("/EditTeachers/:id", CheakLoginControler, async (req, res) => {
   }
 });
 router.delete("/DeleteTeachers/:id", async (req, res) => {
-  console.log(req.body);
   try {
     Teachers.deleteOne({_id: req.params.id},
       (err) => {
@@ -242,7 +240,6 @@ router.post("/login", async(req,res)=>{
      
  })
    router.delete("/DeleteCourse/:id", async (req, res) => {
-    console.log(req.body);
     try {
       AssignCourseModel.deleteOne({_id: req.params.id},
         (err) => {
@@ -281,7 +278,7 @@ router.post("/login", async(req,res)=>{
   });
 
   router.post("/AssignCourse", CheakLoginControler, async (req, res) => {
-    console.log(req.body);
+
     try {
       const assignCourse = new AssignCourseModel({
         courseName: req.body.CourseName,
@@ -306,7 +303,7 @@ router.post("/login", async(req,res)=>{
     }
   });
   router.put("/EditCourse/:id", CheakLoginControler, async (req, res) => {
-    console.log(req.body);
+
     try {
       const result =  AssignCourseModel.findByIdAndUpdate(
         { _id: req.params.id },
@@ -342,7 +339,7 @@ router.post("/login", async(req,res)=>{
     }
   });
   router.delete("/DeleteCourse/:id", async (req, res) => {
-    console.log(req.body);
+
     try {
       AssignCourseModel.deleteOne({_id: req.params.id},
         (err) => {
@@ -359,7 +356,7 @@ router.post("/login", async(req,res)=>{
           }
         )
     } catch (error) {
-      console.log(error);
+   
       res.status(200).json({
         message: "username and email should be unique",
       });
@@ -377,11 +374,9 @@ router.post("/login", async(req,res)=>{
             "error": "Wrong Username and password"
         }); 
     }
-  
-     
  })
   router.post("/AssignRetakeCourse", CheakLoginControler, async (req, res) => {
-    console.log(req.body);
+
     try {
       const assignCourse = new AssingRetakeReffredModel({
         courseName: req.body.CourseName,
@@ -408,40 +403,7 @@ router.post("/login", async(req,res)=>{
     }
   });
  
-//  router.get("/DocProfile",CheakLoginControler,async(req,res)=>{
-//     try {  
-//         const user = await Doctor.find({ username: req.query.username  });
-//         if(user&&user.length>0){
-//             res.send(user)
-//         }
-        
-//     } catch (error) {
-//         res.status(200).json({
-//             "error": "Wrong Username and password"
-//         }); 
-//     }
-  
-     
-//  })
 
-
-//  router.delete('/delete/:id',async(req,res)=>{
-//     console.log(req.params.id)
-//     Doctor.deleteOne({_id: req.params.id},
-//         (err) => {
-//             if (err) {
-//               res.status(500).json({
-//                 error: "There was a server side error!",
-//               });
-//             } else {
-//               res.status(200).json({
-              
-//                 message: "Delete SUccessfully",
-//               });
-//             }
-//           }
-//         )
-//   })
 
 
  module.exports = router;

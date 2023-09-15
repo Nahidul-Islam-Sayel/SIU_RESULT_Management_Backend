@@ -36,7 +36,7 @@ const saltRounds = 10;
 router.post("/login",async(req,res)=>{
     try {
        const user = await Department.find({ username: req.body.username });
-       console.log(user)
+  
        if (user&&user.length>0) {
              const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
             
@@ -72,54 +72,7 @@ router.post("/login",async(req,res)=>{
     }  
  })
  
-//  router.get("/DocProfile",CheakLoginControler,async(req,res)=>{
-//     try {  
-//         const user = await Doctor.find({ username: req.query.username  });
-//         if(user&&user.length>0){
-//             res.send(user)
-//         }
-        
-//     } catch (error) {
-//         res.status(200).json({
-//             "error": "Wrong Username and password"
-//         }); 
-//     }
-  
-     
-//  })
 
-//  router.get("/AllDoctors",CheakLoginControler,async(req,res)=>{
-//     try {  
-//         const user = await Doctor.find({  });
-//         if(user&&user.length>0){
-//             res.send(user)
-//         }
-        
-//     } catch (error) {
-//         res.status(200).json({
-//             "error": "Wrong Username and password"
-//         }); 
-//     }
-  
-     
-//  })
-//  router.delete('/delete/:id',async(req,res)=>{
-//     console.log(req.params.id)
-//     Doctor.deleteOne({_id: req.params.id},
-//         (err) => {
-//             if (err) {
-//               res.status(500).json({
-//                 error: "There was a server side error!",
-//               });
-//             } else {
-//               res.status(200).json({
-              
-//                 message: "Delete SUccessfully",
-//               });
-//             }
-//           }
-//         )
-//   })
 
 
  module.exports = router;
