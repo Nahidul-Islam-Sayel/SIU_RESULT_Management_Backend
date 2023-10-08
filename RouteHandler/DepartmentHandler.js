@@ -8,31 +8,6 @@ const jwt = require("jsonwebtoken");
 const Department = new mongoose.model("Department",DepartmentSchema);
 const CheakLoginControler = require('../MiddleWears/CheakLoginControler')
 const saltRounds = 10;
-// router.post("/doctor",async(req,res)=>{
-//     console.log(req.body)
-//     const hashpassword =  await bcrypt.hash(req.body.password, saltRounds);
-//     console.log(hashpassword);
-//     try {
-//        console.log(req.body)
-//         const newDoctor = new Doctor({
-//             name: req.body.doctorname,
-//             username: req.body.username,
-//             email: req.body.email,
-//             phone: req.body.phone,
-//             chamber: req.body.chamber,
-//             password: hashpassword,
-//         });
-//         await newDoctor.save();
-//         res.status(200).json({
-//             message: "Signup was successful!",
-//         });
-//     } catch(error) {
-//     console.log(error)
-//         res.status(200).json({
-//             message: "username and email should be uniqe",
-//         });
-//     }
-// })
 router.post("/login",async(req,res)=>{
     try {
        const user = await Department.find({ username: req.body.username });
@@ -71,8 +46,4 @@ router.post("/login",async(req,res)=>{
      });
     }  
  })
- 
-
-
-
  module.exports = router;

@@ -99,16 +99,43 @@ router.get("/Students",CheakLoginControler,async(req,res)=>{
           }); 
       }       
    })
-router.post("/Marks", async (req, res) => {
+   router.post("/Marks", async (req, res) => {
     try {
         const Sessional = parseInt(req.body.Sessional);
         const Midterm = parseInt(req.body.Midterm);
         const Final = parseInt(req.body.Final);
+        const Total = Sessional + Midterm + Final;
+
+        // Calculate CGPA based on Total
+        let CGPA = "";
+        if (Total >= 80 && Total <= 100) {
+            CGPA = 4.0;
+        } else if (Total >= 75 && Total <= 79) {
+            CGPA = 3.75;
+        } else if (Total >= 70 && Total <= 74) {
+            CGPA = 3.5;
+        } else if (Total >= 65 && Total <= 69) {
+            CGPA = 3.25;
+        } else if (Total >= 60 && Total <= 64) {
+            CGPA = 3.0;
+        } else if (Total >= 55 && Total <= 59) {
+            CGPA = 2.75;
+        } else if (Total >= 50 && Total <= 54) {
+            CGPA = 2.5;
+        } else if (Total >= 45 && Total <= 49) {
+            CGPA = 2.25;
+        } else if (Total >= 40 && Total <= 44) {
+            CGPA = 2.0;
+        } else if (Total >= 0 && Total <= 39) {
+            CGPA = 0.0;
+        }
+
         const MarksAdd = new Marks({
             Sessional: Sessional,
             Midterm: Midterm,
             Final: Final,
-            Total: Sessional + Midterm + Final,
+            Total: Total,
+            CGPA: CGPA, // Add CGPA to the schema
             CourseHoure: req.body.CourseHoure,
             Roll: req.body.Roll,
             CourseCode: req.body.CourseCode,
@@ -116,7 +143,7 @@ router.post("/Marks", async (req, res) => {
             Name: req.body.name,
             Reg: req.body.registation
         });
-        
+
         await MarksAdd.save();
         res.status(200).json({
             message: "Marks Added Successfully",
@@ -128,6 +155,7 @@ router.post("/Marks", async (req, res) => {
         });
     }
 });
+
 router.get("/ResultList",CheakLoginControler,async(req,res)=>{
          try {  
              const user = await Marks.find({ CourseCode: req.query.course });
@@ -145,52 +173,89 @@ router.get("/ResultList",CheakLoginControler,async(req,res)=>{
        
           
       })
-router.put('/EditNumber/:id', async (req, res) => {
+      router.put('/EditNumber/:id', async (req, res) => {
         try {
-          const user = await Marks.find({ _id: req.params.id });
-            let Total =0;
-            if(req.body.Sessional)
-               Total+=parseInt(req.body.Sessional);
-            else Total+=parseInt(user[0].Sessional);
-            if(req.body.Midterm)
-               Total+=parseInt(req.body.Midterm);
-            else Total+=parseInt(user[0].Midterm);
-            if(req.body.Final)
-               Total+= parseInt(req.body.Final)
-            else Total+=parseInt(user[0].Final)
-            const updatedData = {
-                Total: Total
-            };
+            const user = await Marks.find({ _id: req.params.id });
+            let Total = 0;
+    
+            // Calculate the Total based on the request body or existing data
+            if (req.body.Sessional) {
+                Total += parseInt(req.body.Sessional);
+            } else {
+                Total += parseInt(user[0].Sessional);
+            }
             if (req.body.Midterm) {
-              updatedData.Midterm = req.body.Midterm;
-          }
-          if (req.body.Sessional) {
-            updatedData.Sessional = req.body.Sessional;
-        }
-
-          if (req.body.Final) {
-              updatedData.Final = req.body.Final;
-          }
-          
+                Total += parseInt(req.body.Midterm);
+            } else {
+                Total += parseInt(user[0].Midterm);
+            }
+            if (req.body.Final) {
+                Total += parseInt(req.body.Final);
+            } else {
+                Total += parseInt(user[0].Final);
+            }
+    
+            // Calculate CGPA based on Total
+            let CGPA = "";
+            if (Total >= 80 && Total <= 100) {
+                CGPA = 4.0;
+            } else if (Total >= 75 && Total <= 79) {
+                CGPA = 3.75;
+            } else if (Total >= 70 && Total <= 74) {
+                CGPA = 3.5;
+            } else if (Total >= 65 && Total <= 69) {
+                CGPA = 3.25;
+            } else if (Total >= 60 && Total <= 64) {
+                CGPA = 3.0;
+            } else if (Total >= 55 && Total <= 59) {
+                CGPA = 2.75;
+            } else if (Total >= 50 && Total <= 54) {
+                CGPA = 2.5;
+            } else if (Total >= 45 && Total <= 49) {
+                CGPA = 2.25;
+            } else if (Total >= 40 && Total <= 44) {
+                CGPA = 2.0;
+            } else if (Total >= 0 && Total <= 39) {
+                CGPA = 0.0;
+            }
+    
+            // Create an updatedData object with Total and CGPA
+            const updatedData = {
+                Total: Total,
+                CGPA: CGPA, // Add CGPA field
+            };
+    
+            // Check if Midterm, Sessional, and Final are in the request body and update them accordingly
+            if (req.body.Midterm) {
+                updatedData.Midterm = req.body.Midterm;
+            }
+            if (req.body.Sessional) {
+                updatedData.Sessional = req.body.Sessional;
+            }
+            if (req.body.Final) {
+                updatedData.Final = req.body.Final;
+            }
+    
+            // Use Mongoose's findByIdAndUpdate to update the document
             const result = await Marks.findByIdAndUpdate(req.params.id, updatedData, {
-                new: true
+                new: true,
             });
     
             if (!result) {
                 return res.status(404).json({
-                    message: 'Document not found'
+                    message: 'Document not found',
                 });
             }
     
             res.status(200).json({
                 message: 'Updated successfully',
-                updatedData: result
+                updatedData: result,
             });
         } catch (error) {
-         
             res.status(500).json({
-                error: 'There was an error'
+                error: 'There was an error',
             });
         }
     });
+    
 module.exports = router;

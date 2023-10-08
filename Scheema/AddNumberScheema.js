@@ -17,6 +17,11 @@ const AddNumberSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    
+    CGPA: {
+        type: Number,
+        required: true,
+    },
     Roll: {
         type: Number,
         required: true,
