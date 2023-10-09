@@ -59,7 +59,7 @@ router.post("/login", async(req,res)=>{
     const { roll, Semester } = req.query;
 
 
-    console.log(roll, Semester);
+
 
     const results = await Marks.find({ Roll: roll, Semester: Semester });
 
@@ -69,7 +69,7 @@ router.post("/login", async(req,res)=>{
       res.status(404).json({ error: "No matching records found" });
     }
   } catch (error) {
-    console.error(error);
+
     res.status(500).json({ error: "Something went wrong. Please try again later." });
   }
 });
@@ -93,17 +93,16 @@ router.post("/login", async(req,res)=>{
  router.get("/SingleStudents", CheakLoginControler, async (req, res) => {
     try {
       const roll = req.query.roll;
-      console.log(roll);
+    
   
-      const user = await Students.findOne({ roll });
-  
+      const user = await Students.findOne({ roll: roll });
+   
       if (user) {
         res.send(user);
       } else {
         res.status(404).json({ error: "Student not found" });
       }
     } catch (error) {
-      console.error(error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -122,7 +121,7 @@ router.post("/AddCourse",CheakLoginControler, async(req,res)=>{
             message: "Course add successful!",
         });
     } catch(error) {
-    console.log(error)
+  
         res.status(200).json({
             message: "someting is wrong",
         });
@@ -143,7 +142,7 @@ router.post("/PublisedResult",CheakLoginControler, async(req,res)=>{
             message: "Result Publised successful!",
         });
     } catch(error) {
-    console.log(error)
+  
         res.status(200).json({
             message: "someting is wrong",
         });
@@ -167,7 +166,7 @@ router.delete("/HideResult/:roll/:semester", async (req, res) => {
         });
       }
     } catch (error) {
-      console.error(error);
+    
       res.status(500).json({
         error: "There was a server-side error!",
       });
@@ -177,7 +176,7 @@ router.delete("/HideResult/:roll/:semester", async (req, res) => {
     try {
       const roll = req.params.id;
       const student = await Students.findOne({ roll });
-      console.log()
+    
       if (!student) {
         return res.status(404).json({ error: "Student not found" });
       }
@@ -194,7 +193,7 @@ router.delete("/HideResult/:roll/:semester", async (req, res) => {
         return res.status(200).json({ error: "Student has already completed semester 8" });
       }
     } catch (error) {
-      console.error(error);
+    
       return res.status(500).json({
         error: "There was a server-side error",
       });

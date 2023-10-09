@@ -35,7 +35,7 @@ router.post("/user", async (req, res) => {
             message: "Signup was successful!",
         });
     } catch (error) {
-        console.log(error);
+    
         res.status(200).json({
             message: "username and email should be uniqe",
         });
@@ -88,19 +88,19 @@ router.post("/login", async (req, res) => {
                     });
                 }
             } else {
-                console.log('User password is not defined');
+       
                 res.status(200).json({
                     "error": "User password is not defined"
                 });
             }
         } else {
-            console.log('User not found');
+          
             res.status(200).json({
                 "error": "User not found"
             });
         }
     } catch (error) {
-        console.error('Error:', error);
+   
         res.status(500).json({
             "error": "Internal server error"
         });

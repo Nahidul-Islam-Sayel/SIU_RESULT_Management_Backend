@@ -42,7 +42,7 @@ router.post("/StudentsRegistration",async(req,res)=>{
             message: "Signup was successful!",
         });
     } catch(error) {
-    console.log(error)
+ 
         res.status(200).json({
             message: "username and email should be uniqe",
         });
@@ -65,7 +65,7 @@ router.post("/TeachersRegistration",CheakLoginControler, async(req,res)=>{
             message: "Signup was successful!",
         });
     } catch(error) {
-    console.log(error)
+   
         res.status(200).json({
             message: "username and email should be uniqe",
         });
@@ -98,9 +98,9 @@ router.put("/EditTeachers/:id", CheakLoginControler, async (req, res) => {
         }
       }
     );
-    console.log(result);
+   
   } catch (error) {
-    console.log(error);
+  
     res.status(200).json({
       message: "username and email should be unique",
     });
@@ -123,7 +123,7 @@ router.delete("/DeleteTeachers/:id", async (req, res) => {
         }
       )
   } catch (error) {
-    console.log(error);
+
     res.status(200).json({
       message: "username and email should be unique",
     });
@@ -143,7 +143,7 @@ router.post("/AddCourse",CheakLoginControler, async(req,res)=>{
             message: "Course add successful!",
         });
     } catch(error) {
-    console.log(error)
+
         res.status(200).json({
             message: "someting is wrong",
         });
@@ -188,7 +188,7 @@ router.post("/login", async(req,res)=>{
       // console.log(user)
        if (user&&user.length>0) {
             //  const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
-            console.log(req.body.password_2,user[0].password)
+         
              if(req.body.password_2==user[0].password) {
                  // generate token
  
@@ -256,7 +256,7 @@ router.post("/login", async(req,res)=>{
           }
         )
     } catch (error) {
-      console.log(error);
+
       res.status(200).json({
         message: "username and email should be unique",
       });
@@ -296,7 +296,7 @@ router.post("/login", async(req,res)=>{
         message: "Signup was successful!",
       });
     } catch (error) {
-      console.log(error);
+  
       res.status(200).json({
         message: "username and email should be unique",
       });
@@ -330,9 +330,9 @@ router.post("/login", async(req,res)=>{
           }
         }
       );
-      console.log(result);
+
     } catch (error) {
-      console.log(error);
+
       res.status(200).json({
         message: "username and email should be unique",
       });
@@ -396,7 +396,7 @@ router.post("/login", async(req,res)=>{
         message: "Signup was successful!",
       });
     } catch (error) {
-      console.log(error);
+   
       res.status(200).json({
         message: "username and email should be unique",
       });

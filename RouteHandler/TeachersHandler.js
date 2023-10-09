@@ -22,7 +22,7 @@ router.post("/login", async(req,res)=>{
        if (user&&user.length>0) {
             //  const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
             const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
-           console.log('isvalidpass',isvalidPassword)
+     
              if(isvalidPassword) {
                  // generate token
                  const token = jwt.sign({
@@ -149,7 +149,7 @@ router.get("/Students",CheakLoginControler,async(req,res)=>{
             message: "Marks Added Successfully",
         });
     } catch (error) {
-        console.log(error);
+    
         res.status(200).json({
             message: "Something Is Wrong, Please Try Again",
         });
