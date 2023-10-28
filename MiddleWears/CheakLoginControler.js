@@ -1,15 +1,19 @@
+require('dotenv').config();
 const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 const checkLogin = (req, res, next) => {
     const { authorization } = req.headers;
     try {
         const token = authorization.split(' ')[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET); // Use the JWT_SECRET variable
         const { username, userId } = decoded;
         req.username = username;
         req.userId = userId;
         next();
-    } catch(err) {
+    } catch (err) {
         next("Authentication failure!");
     }
 };
