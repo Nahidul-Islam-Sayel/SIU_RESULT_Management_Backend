@@ -11,7 +11,7 @@ var cors = require('cors');
 dotenv.config(); // Load environment variables from .env file
 
 const app = express();
-const PORT = 1000||process.env.PORT;
+const PORT = 5000||process.env.PORT;
 
 // Access the DATABASE variable after loading the environment variables
 const DATABASE = process.env.DATABASE;
