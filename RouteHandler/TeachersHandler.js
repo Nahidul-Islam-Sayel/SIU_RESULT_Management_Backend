@@ -20,11 +20,10 @@ router.post("/login", async(req,res)=>{
     try {
        const user = await Teachers.find({ username: req.body.name });
        if (user&&user.length>0) {
-            //  const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
             const isvalidPassword=  await bcrypt.compare(req.body.password, user[0].password);
      
              if(isvalidPassword) {
-                 // generate token
+              
                  const token = jwt.sign({
                      username: user[0].username,
                     
